@@ -1,0 +1,43 @@
+﻿@model Customer
+<br /><br />
+<br />
+<div class="border p-3 mt-4">
+    <div class="row" pb-2>
+        <h2 class="text-primary">Enter Your Details</h2>
+        <hr />
+    </div>
+    <div asp-validation-summary="All"></div>
+
+    @using (Html.BeginForm("Create", "Customer", FormMethod.Post))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(model=> model.CustomerName) 
+            @Html.TextBoxFor(model => model.CustomerName)
+            @Html.ValidationMessageFor(model=> model.CustomerName)
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model=> model.Email)  
+            @Html.TextBoxFor(model => model.Email)
+            @Html.ValidationMessageFor(model=> model.Email)
+
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model=> model.Phone) 
+            @Html.TextBoxFor(model => model.Phone)
+            @Html.ValidationMessageFor(model=> model.Phone)
+
+        </div>
+        @Html.HiddenFor(model=>model.RoomTypeId)
+
+       <button type="submit" class="btn btn-primary" style="width:150px">Next</button>
+    }
+    <a asp-controller="Hotel" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
+</div>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

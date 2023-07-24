@@ -1,0 +1,122 @@
+﻿@model IEnumerable<RoomType>
+
+@*@if (Model.Count > 0)
+{
+    <div class="container p-3">
+        <div class=" row pt-4">
+            <div class=" col-6 ">
+                <h2 class="text-primary">Available Rooms</h2>
+            </div>
+        </div>
+        <br /><br />
+
+
+        <table class=" table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Room Type
+                    </th>
+                    <th>
+                        Total Rooms
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var roomType in Model)
+                {
+                    <tr>
+                        <td width="40%">
+                            @roomType.TypeName
+                        </td>
+                        <td width="30%">
+                            @roomType.RoomCount
+
+                        </td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller ="Customer" asp-action="Create">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Book Now
+                                    
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+}
+
+else
+{
+    <p> No Rooms Are Available RightNow.</p>
+}
+*@
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class=" col-6 ">
+            <h2 class="text-primary">List of Types of Room</h2>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a asp-controller="Hotel" asp-action="Index" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i>&nbsp; Back
+        </a>
+
+    </div>
+    <br /><br />
+
+
+    <table class=" table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Type Name
+                </th>
+                <th>
+                    Room Count
+                </th>
+                <th>
+                    Price per room
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+@foreach(var roomType in Model)
+{
+                <tr>
+                    <td width="20%">
+                        @roomType.TypeName
+                    </td>
+                    <td width="20%">
+                        @roomType.RoomCount
+                    </td>
+                    <td width="20%">
+                        @roomType.Price
+                    </td>
+                    <td width="40%"> 
+                        @if (roomType.RoomCount > 0)
+                        {
+                            <div class="w-75 btn-group" role="group">
+                                @Html.ActionLink("Book","Create","Customer", new {roomTypeId= roomType.Id})
+                            </div>
+                        }
+                        else
+                        {
+                            <p>No rooms available for booking.</p>
+                        }
+
+
+                    </td>
+                </tr>
+}
+        </tbody>
+    </table>
+
+</div>
